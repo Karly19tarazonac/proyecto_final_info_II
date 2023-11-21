@@ -1,7 +1,7 @@
-from vista_t3 import Ventanaprincipal
+from vista_pf import Ventanaprincipal
 import sys
 from PyQt5.QtWidgets import QApplication
-from modelo_t3 import Servicio
+from modelo_pf import Servicio
 
 class Coordinador(object):
     #como el coordindor enlaza el modelo con la vista debe
