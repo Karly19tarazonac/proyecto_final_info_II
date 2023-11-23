@@ -54,6 +54,7 @@ class AbrirVentana_opciones(QMainWindow):
     def setup(self):
         self.leer_archivo_dcm.clicked.connect(self.abrirVentanaBuscarCarpeta)
         self.mirar_inventarios.clicked.connect(self.abrirVentanaInventario)
+        self.Diagnosticos.clicked.connect(self.abrirVentanaDiagnosticos)
 
     def abrirVentanaInventario(self):
         ventana_inventario=VentanaInventario(self)
@@ -71,9 +72,39 @@ class AbrirVentana_opciones(QMainWindow):
     def recibir_imagen2(self,imagen):
         return self.__controlador.dcm_info(imagen)   
 
-    
+    def abrirVentanaDiagnosticos(self):
+        ventana_diagnostico=VentanaDiagnosticos(self)
+        self.hide()
+        ventana_diagnostico.show()
+         
     def cerrar(self):
         self.__ventanaPadre.show()
+
+class VentanaDiagnosticos(QDialog):
+    def __init__(self, ppal=None):
+        super().__init__(ppal)
+        loadUi(r'C:\Users\KarlyJuliana\Documents\universidad\informatica_II\proyecto_final_info_II\pantalla.ui',self)
+        self.__ventanaPadre = ppal
+        self.setWindowTitle("apertura de diagnosticos")
+        self.setup()
+
+    def setup(self):
+        self.open_file.clicked.connect(self.apertura)
+    
+    def apertura(self):
+        self.abrir_dialogo()
+
+    def abrir_dialogo(self):
+        filename= QFileDialog.getOpenFileName()[0]
+        # print(filename)
+        self.text_path.clear()
+        self.text_path.append(filename)
+
+        with open(filename,'r') as file:
+            lineas = file.readlines()
+            for linea in lineas:
+                linea= linea.rstrip()
+                self.text_read.append(linea)
 
 class VentanaBuscarCarpeta(QDialog):
     def __init__(self, ppal=None):
