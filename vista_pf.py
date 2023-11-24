@@ -38,13 +38,19 @@ class Ventanaprincipal(QMainWindow):
             msg.setText("Usuario no Valido")
         #se muestra la ventana
             msg.show()
+
+    def recibir_imagen(self,imagen):
+        self.__controlador.img_conextion(imagen)
+
+    def recibir_imagen2(self,imagen):
+        return self.__controlador.dcm_info(imagen)
     
     def abrirVentanaopciones(self):
         ventana_opciones=AbrirVentana_opciones(self)
         self.hide()
         ventana_opciones.show()
     
-class AbrirVentana_opciones(QMainWindow):
+class AbrirVentana_opciones(QDialog):
     def __init__(self, ppal=None):
         super().__init__(ppal)
         loadUi('ventana_opciones.ui',self)
@@ -54,7 +60,7 @@ class AbrirVentana_opciones(QMainWindow):
     def setup(self):
         self.leer_archivo_dcm.clicked.connect(self.abrirVentanaBuscarCarpeta)
         self.mirar_inventarios.clicked.connect(self.abrirVentanaInventario)
-        self.Diagnosticos.clicked.connect(self.abrirVentanaDiagnosticos)
+        # self.Diagnosticos.clicked.connect(self.abrirVentanaDiagnosticos)
 
     def abrirVentanaInventario(self):
         ventana_inventario=VentanaInventario(self)
@@ -67,44 +73,44 @@ class AbrirVentana_opciones(QMainWindow):
         ventana_browse.show()
 
     def recibir_imagen(self,imagen):
-        self.__controlador.img_conextion(imagen)
+        self.__ventanaPadre.recibir_imagen(imagen)
 
     def recibir_imagen2(self,imagen):
-        return self.__controlador.dcm_info(imagen)   
-
-    def abrirVentanaDiagnosticos(self):
-        ventana_diagnostico=VentanaDiagnosticos(self)
-        self.hide()
-        ventana_diagnostico.show()
+        return self.__ventanaPadre.recibir_imagen2(imagen)
+        
+    # def abrirVentanaDiagnosticos(self):
+    #     ventana_diagnostico=VentanaDiagnosticos(self)
+    #     self.hide()
+    #     ventana_diagnostico.show()
          
     def cerrar(self):
         self.__ventanaPadre.show()
 
-class VentanaDiagnosticos(QDialog):
-    def __init__(self, ppal=None):
-        super().__init__(ppal)
-        loadUi(r'C:\Users\KarlyJuliana\Documents\universidad\informatica_II\proyecto_final_info_II\pantalla.ui',self)
-        self.__ventanaPadre = ppal
-        self.setWindowTitle("apertura de diagnosticos")
-        self.setup()
+# class VentanaDiagnosticos(QDialog):
+#     def __init__(self, ppal=None):
+#         super().__init__(ppal)
+#         loadUi(r'C:\Users\KarlyJuliana\Documents\universidad\informatica_II\proyecto_final_info_II\pantalla.ui',self)
+#         self.__ventanaPadre = ppal
+#         self.setWindowTitle("apertura de diagnosticos")
+#         self.setup()
 
-    def setup(self):
-        self.open_file.clicked.connect(self.apertura)
+    # def setup(self):
+    #     self.open_file.clicked.connect(self.apertura)
     
-    def apertura(self):
-        self.abrir_dialogo()
+    # def apertura(self):
+    #     self.abrir_dialogo()
 
-    def abrir_dialogo(self):
-        filename= QFileDialog.getOpenFileName()[0]
-        # print(filename)
-        self.text_path.clear()
-        self.text_path.append(filename)
+    # def abrir_dialogo(self):
+    #     filename= QFileDialog.getOpenFileName()[0]
+    #     # print(filename)
+    #     self.text_path.clear()
+    #     self.text_path.append(filename)
 
-        with open(filename,'r') as file:
-            lineas = file.readlines()
-            for linea in lineas:
-                linea= linea.rstrip()
-                self.text_read.append(linea)
+        # with open(filename,'r') as file:
+        #     lineas = file.readlines()
+        #     for linea in lineas:
+        #         linea= linea.rstrip()
+        #         self.text_read.append(linea)
 
 class VentanaBuscarCarpeta(QDialog):
     def __init__(self, ppal=None):
@@ -221,21 +227,21 @@ class VentanaInventario(QMainWindow):
              QMessageBox.about(self,"informacion","el archivo esta \n malogrado")
              return None
         
-#         self.QtWidgets.tableWidget.setRowCount(y)
-#         self.QtWidgets.tableWidget.setColumnCount(x)
+        self.tableWidget.setRowCount(y)
+        self.tableWidget.setColumnCount(x)
 
-# #ciclos para asignar valores en columnas
-#         for j in range(x):
-#             encabezado= QtWidgets.QTableWidgetItem(columnas[j])
-#             self.QtWidgets.tableWidget.setHorizontalHeaderItem(j,encabezado )
-# #ciclo para asignar valores a filas
-#             for i in range(y):
-#                 dato=str(df_fila[i][j])
-# #cambia valores nan a vacios
-#                 if dato=="nan":
-#                     dato=""
-# #asigna los datos a la columna y fila correspondiente
-#                 self.QtWidgets.tableWidget.setItem(i,j,QTableWidgetItem(dato))
+#ciclos para asignar valores en columnas
+        for j in range(x):
+            encabezado= QtWidgets.QTableWidgetItem(columnas[j])
+            self.tableWidget.setHorizontalHeaderItem(j,encabezado )
+#ciclo para asignar valores a filas
+            for i in range(y):
+                dato=str(df_fila[i][j])
+#cambia valores nan a vacios
+                if dato=="nan":
+                    dato=""
+#asigna los datos a la columna y fila correspondiente
+                self.tableWidget.setItem(i,j,QTableWidgetItem(dato))
         
     def cerrar(self):
         self.__ventanaPadre.show()
