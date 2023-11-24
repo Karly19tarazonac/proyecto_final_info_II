@@ -53,7 +53,7 @@ class Ventanaprincipal(QMainWindow):
 class AbrirVentana_opciones(QDialog):
     def __init__(self, ppal=None):
         super().__init__(ppal)
-        loadUi('ventana_opciones.ui',self)
+        loadUi('opciones_ventana.ui',self)
         self.__ventanaPadre = ppal
         self.setup()
     
