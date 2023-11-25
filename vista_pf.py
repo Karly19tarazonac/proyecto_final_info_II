@@ -192,10 +192,10 @@ class VentanaVisualizacion(QDialog):
         self.__ventanaPadre.cerrar()
         self.hide()
 
-class VentanaInventario(QMainWindow):
+class VentanaInventario(QDialog):
     def __init__(self, ppal=None):
         super().__init__(ppal)
-        loadUi('tabla.ui',self)
+        loadUi('inventario.ui',self)
         self.__ventanaPadre = ppal
         # self.folder=""
         self.setup()
@@ -203,6 +203,7 @@ class VentanaInventario(QMainWindow):
     def setup(self):
         self.boton_abrir.clicked.connect(self.abrir_archivo)
         self.pushButton.clicked.connect(self.crear_tabla)
+        self.boton_salir.clicked.connect(self.salir_archivo)
 
     def abrir_archivo(self):
         #nos da una tupla que es la direccion y un nombre 
@@ -243,5 +244,6 @@ class VentanaInventario(QMainWindow):
 #asigna los datos a la columna y fila correspondiente
                 self.tableWidget.setItem(i,j,QTableWidgetItem(dato))
         
-    def cerrar(self):
+    def salir_archivo(self):
         self.__ventanaPadre.show()
+        self.hide()
