@@ -29,6 +29,27 @@
     <enum>QFrame::Raised</enum>
    </property>
    <layout class="QGridLayout" name="gridLayout">
+    <item row="3" column="0">
+     <widget class="QPushButton" name="mirar_inventarios">
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(255, 255, 255);</string>
+      </property>
+      <property name="text">
+       <string>Mirar inventarios</string>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="0">
+     <widget class="QPushButton" name="Diagnosticos">
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(255, 255, 255);
+</string>
+      </property>
+      <property name="text">
+       <string>Diagnosticos</string>
+      </property>
+     </widget>
+    </item>
     <item row="2" column="0">
      <widget class="QPushButton" name="leer_archivo_dcm">
       <property name="baseSize">
@@ -52,23 +73,12 @@
      </widget>
     </item>
     <item row="4" column="0">
-     <widget class="QPushButton" name="Diagnosticos">
-      <property name="styleSheet">
-       <string notr="true">background-color: rgb(255, 255, 255);
-</string>
-      </property>
-      <property name="text">
-       <string>Diagnosticos</string>
-      </property>
-     </widget>
-    </item>
-    <item row="3" column="0">
-     <widget class="QPushButton" name="mirar_inventarios">
+     <widget class="QPushButton" name="pushButton">
       <property name="styleSheet">
        <string notr="true">background-color: rgb(255, 255, 255);</string>
       </property>
       <property name="text">
-       <string>Mirar inventarios</string>
+       <string>Administrar ansetesia</string>
       </property>
      </widget>
     </item>
