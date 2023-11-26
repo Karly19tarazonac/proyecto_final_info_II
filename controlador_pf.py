@@ -21,6 +21,9 @@ class Coordinador(object):
     
     def datos_slide3(self, valor3):
         return self.__mi_sistema.frecuenciaSenal(valor3)
+        
+    def datos_slide2(self, valor2):
+        return self.__mi_sistema.anestesia_admin(valor2)
     
 #esta clase no cambia ya que en esta simplemente se hacen las conexiones que siempre van
 class Principal(object):
