@@ -1,5 +1,7 @@
 import pydicom
 import matplotlib.pyplot as plt
+import dicom2nifti
+import os
 
 class Servicio(object):
     def __init__(self):
@@ -47,6 +49,10 @@ class Servicio(object):
             plt.imshow(im, cmap = plt.cm.bone)
         plt.axis('off')
         plt.savefig("temp_image.png")
+
+    def nifti_conversion(self,imagen):
+        os.mkdir("Nifti")
+        dicom2nifti.convert_directory(imagen,"Nifti")
 
     def ampliarSenal(self,valor1):
         self.nivel1 = valor1*0.1

@@ -80,23 +80,43 @@ background-color: rgb(140, 140, 140);</string>
     <string>Presione opcion deseada:</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="salir">
+  <widget class="QWidget" name="">
    <property name="geometry">
     <rect>
      <x>180</x>
-     <y>240</y>
-     <width>75</width>
-     <height>23</height>
+     <y>200</y>
+     <width>77</width>
+     <height>54</height>
     </rect>
    </property>
-   <property name="text">
-    <string>Salir</string>
-   </property>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QPushButton" name="salir">
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(255, 255, 255);</string>
+      </property>
+      <property name="text">
+       <string>Salir</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="log_out">
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(255, 255, 255);</string>
+      </property>
+      <property name="text">
+       <string>Log Out</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
   </widget>
   <zorder>label</zorder>
   <zorder>frame</zorder>
   <zorder>label_2</zorder>
   <zorder>salir</zorder>
+  <zorder>log_out</zorder>
  </widget>
  <resources/>
  <connections/>

@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>561</width>
+    <width>616</width>
     <height>342</height>
    </rect>
   </property>
@@ -18,7 +18,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>561</width>
+     <width>611</width>
      <height>71</height>
     </rect>
    </property>
@@ -71,7 +71,7 @@ border-radius:5px;</string>
    <widget class="QPushButton" name="boton_salir">
     <property name="geometry">
      <rect>
-      <x>464</x>
+      <x>430</x>
       <y>20</y>
       <width>71</width>
       <height>31</height>
@@ -89,9 +89,9 @@ border-radius:5px;
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>250</x>
+      <x>240</x>
       <y>20</y>
-      <width>211</width>
+      <width>171</width>
       <height>21</height>
      </rect>
     </property>
@@ -107,17 +107,36 @@ border-radius:5px;
      <string>    INVENTARIO</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="log_out">
+    <property name="geometry">
+     <rect>
+      <x>520</x>
+      <y>20</y>
+      <width>71</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(255, 255, 255);
+border-radius:5px;
+</string>
+    </property>
+    <property name="text">
+     <string>Log Out</string>
+    </property>
+   </widget>
    <zorder>pushButton</zorder>
    <zorder>boton_abrir</zorder>
    <zorder>boton_salir</zorder>
    <zorder>label</zorder>
+   <zorder>log_out</zorder>
   </widget>
   <widget class="QTableWidget" name="tableWidget">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>70</y>
-     <width>561</width>
+     <width>611</width>
      <height>271</height>
     </rect>
    </property>

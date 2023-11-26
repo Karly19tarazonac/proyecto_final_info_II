@@ -15,6 +15,9 @@ class Coordinador(object):
         self.__mi_sistema.pictureMaker(imagen)
     def dcm_info(self,imagen):
         return self.__mi_sistema.leerDicom(imagen)
+    
+    def nifti_conversion(self, imagen):
+        self.__mi_sistema.nifti_conversion(imagen)
 
     def datos_slide1(self, valor1):
         return self.__mi_sistema.ampliarSenal(valor1)

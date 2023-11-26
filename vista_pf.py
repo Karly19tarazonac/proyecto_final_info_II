@@ -10,6 +10,9 @@ from PyQt5.uic import loadUi;
 import os
 from PyQt5.QtGui import QPixmap
 import pandas as pd
+import nilearn
+from nilearn import plotting
+import shutil
 
 class Ventanaprincipal(QMainWindow):
     #constructor
@@ -28,7 +31,6 @@ class Ventanaprincipal(QMainWindow):
         self.__controlador = c
 
     def accion_ingresar(self):
-        # print("Boton presionado")
         usuario = self.campo_usuario.text()
         password = self.campo_password.text()
         #esta informacion la debemos pasar al controlador
@@ -52,6 +54,9 @@ class Ventanaprincipal(QMainWindow):
 
     def recibir_imagen2(self,imagen):
         return self.__controlador.dcm_info(imagen)
+    
+    def recibir_imagen3d(self,imagen):
+        self.__controlador.nifti_conversion(imagen)
         
     def slider_uno(self, event):
         return self.__controlador.datos_slide1(event)
@@ -84,7 +89,8 @@ class AbrirVentana_opciones(QDialog):
         self.mirar_inventarios.clicked.connect(self.abrirVentanaInventario)
         self.Diagnosticos.clicked.connect(self.abrirVentanaDiagnosticos)
         self.pushButton.clicked.connect(self.abiriVentanaAnestesia)
-        self.salir.clicked.connect(self.cerrar)
+        self.img3d.clicked.connect(self.abrirVentanaOpciones3d)
+        self.log_out.clicked.connect(self.logout)
 
     def abiriVentanaAnestesia(self):
         ventana_anestesia=VentanaAnestesia(self)
@@ -106,6 +112,9 @@ class AbrirVentana_opciones(QDialog):
 
     def recibir_imagen2(self,imagen):
         return self.__ventanaPadre.recibir_imagen2(imagen)
+    
+    def recibir_imagen3d(self,imagen):
+        self.__ventanaPadre.recibir_imagen3d(imagen)
 
     def slider_uno(self, event):
         return self.__ventanaPadre.slider_uno(event)
@@ -125,6 +134,158 @@ class AbrirVentana_opciones(QDialog):
         self.__ventanaPadre.show()
         self.hide()
 
+    def abrirVentanaOpciones3d(self):
+        ventana_opciones=VentanaOpciones3d(self)
+        self.hide()
+        ventana_opciones.show()
+
+    def logout(self):
+        self.__ventanaPadre.show()
+        self.hide()
+
+class VentanaOpciones3d(QDialog):
+    def __init__(self, ppal=None):
+        super().__init__(ppal)
+        loadUi('opciones3d.ui',self)
+        self.__ventanaPadre = ppal
+        self.setup()
+    
+    def setup(self):
+        self.dcm.clicked.connect(self.abrirVentanaBuscarCarpeta)
+        self.nii.clicked.connect(self.abrirVentanaBuscarArchivo)
+        self.buttonBox.rejected.connect(self.cerrar)
+        self.log_out.clicked.connect(self.logout)
+
+    def abrirVentanaBuscarCarpeta(self):
+        ventana_browse=VentanaBuscarCarpeta2(self)
+        self.hide()
+        ventana_browse.show()
+
+    def abrirVentanaBuscarArchivo(self):
+        ventana_browse=VentanaBuscarArchivo(self)
+        self.hide()
+        ventana_browse.show()
+
+    def recibir_imagen3d(self,imagen):
+        self.__ventanaPadre.recibir_imagen3d(imagen)
+
+    def cerrar(self):
+        self.__ventanaPadre.show()
+        self.hide()
+
+    def logout(self):
+        self.__ventanaPadre.logout()
+        self.hide()
+
+class VentanaBuscarCarpeta2(QDialog):
+    def __init__(self, ppal=None):
+        super().__init__(ppal)
+        loadUi('dialog_filesearch.ui',self)
+        self.__ventanaPadre = ppal
+        self.file=""
+        self.setup()
+
+    def setup(self):
+        self.browse.clicked.connect(self.browsefiles)
+        self.buttonBox.accepted.connect(self.abrirVentanaVisualizacion3d)
+        self.buttonBox.rejected.connect(self.cerrar)
+        self.log_out.clicked.connect(self.logout)
+
+    def browsefiles(self):
+        carpeta=QFileDialog.getExistingDirectory(self,"Open File")
+        self.filepath.setText(carpeta)
+        self.__ventanaPadre.recibir_imagen3d(carpeta)
+        x = os.listdir("Nifti")
+        file= x[0]
+        self.file = "Nifti/"+file
+
+    def cerrar(self):
+        self.__ventanaPadre.show()
+
+    def abrirVentanaVisualizacion3d(self):
+        ventana_visualizacion=VentanaVisualizacion3d(self)
+        self.hide()
+        ventana_visualizacion.show()
+
+    def recibir_imagen3d(self,imagen):
+        self.__ventanaPadre.recibir_imagen3d(imagen)
+    
+    def logout(self):
+        self.__ventanaPadre.logout()
+        self.hide()
+
+class VentanaBuscarArchivo(QDialog):
+    def __init__(self, ppal=None):
+        super().__init__(ppal)
+        loadUi('filesearch.ui',self)
+        self.__ventanaPadre = ppal
+        self.file=""
+        self.setup()
+
+    def setup(self):
+        self.browse.clicked.connect(self.browsefiles)
+        self.buttonBox.accepted.connect(self.abrirVentanaVisualizacion3d)
+        self.buttonBox.rejected.connect(self.cerrar)
+        self.log_out.clicked.connect(self.logout)
+
+    def browsefiles(self):
+        archivo=QFileDialog.getOpenFileName(self,"Open File")[0]
+        self.filepath.setText(archivo)
+        self.file=archivo
+
+    def cerrar(self):
+        self.__ventanaPadre.show()
+
+    def abrirVentanaVisualizacion3d(self):
+        ventana_visualizacion=VentanaVisualizacion3d(self)
+        self.hide()
+        ventana_visualizacion.show()
+    
+    def logout(self):
+        self.__ventanaPadre.logout()
+        self.hide()
+
+class VentanaVisualizacion3d(QDialog):
+    def __init__(self, ppal=None):
+        super().__init__(ppal)
+        loadUi('visualizacion3d.ui',self)
+        self.__ventanaPadre = ppal
+        self.eje="ortho"
+        self.setup()
+
+    def setup(self):
+        self.cargar()
+        self.buttonBox.rejected.connect(self.cerrar)
+        self.log_out.clicked.connect(self.logout)
+        # self.cb.activated.connect(self.cambiarEje)
+
+    def cargar(self):
+        file=self.__ventanaPadre.file
+        nilearn.plotting.plot_anat(file,display_mode=self.eje,output_file="temp_image")
+        pixmap = QPixmap("temp_image.png")
+        self.img.setPixmap(pixmap)
+        os.remove('temp_image.png')
+        shutil.rmtree("Nifti",ignore_errors=True)
+
+    # def cambiarEje(self):
+    #     if self.cb.currentText() == "Ortho":
+    #         self.eje="ortho"
+    #     elif self.cb.currentText() == "Axial":
+    #         self.eje="z"
+    #     elif self.cb.currentText() == "Sagital":
+    #         self.eje="x"
+    #     elif self.cb.currentText() == "Coronal":
+    #         self.eje="y"
+    #     self.cargar()
+
+    def cerrar(self):
+        self.__ventanaPadre.show()
+        self.hide()
+
+    def logout(self):
+        self.__ventanaPadre.logout()
+        self.hide()
+
 class Ventana_opciones2(QDialog):
     def __init__(self, ppal=None):
         super().__init__(ppal)
@@ -138,6 +299,7 @@ class Ventana_opciones2(QDialog):
         # self.Diagnosticos.clicked.connect(self.abrirVentanaDiagnosticos)
         # self.pushButton.clicked.connect(self.abiriVentanaAnestesia)
         self.salir.clicked.connect(self.cerrar)
+        self.log_out.clicked.connect(self.logout)
 
     def abrirVentanaInventario(self):
         ventana_inventario=VentanaInventario(self)
@@ -146,6 +308,10 @@ class Ventana_opciones2(QDialog):
 
     def cerrar(self):
         self.__ventanaPadre.show()
+        self.hide()
+
+    def logout(self):
+        self.__ventanaPadre.logout()
         self.hide()
 
 class VentanaDiagnosticos(QDialog):
@@ -159,6 +325,7 @@ class VentanaDiagnosticos(QDialog):
     def setup(self):
         self.open_file.clicked.connect(self.abrir_dialogo)
         self.salir_boton.clicked.connect(self.cerrar)
+        self.log_out.clicked.connect(self.logout)
     
     def cerrar(self):
         self.__ventanaPadre.show()
@@ -169,6 +336,10 @@ class VentanaDiagnosticos(QDialog):
         self.file_path.setText(filename)
         text = open(filename,"r")
         self.display.setText(text.read())
+
+    def logout(self):
+        self.__ventanaPadre.logout()
+        self.hide()
 
 class VentanaAnestesia(QDialog):
     def __init__(self, ppal=None):
@@ -185,6 +356,7 @@ class VentanaAnestesia(QDialog):
         # self.anest.valueChanged.connect(self.slider_dos)
         self.presion.valueChanged.connect(self.slider_tres)
         self.boton_salir.clicked.connect(lambda:self.close())
+        self.log_out.clicked.connect(self.logout)
 
 
     def slider_uno(self, event):
@@ -200,7 +372,7 @@ class VentanaAnestesia(QDialog):
         self.grafica.datos3(valor3)
 
     def logout(self):
-        self.__ventanaPadre.show()
+        self.__ventanaPadre.logout()
         self.hide()
 
 class Canvas_grafica(FigureCanvas):
@@ -265,7 +437,7 @@ class VentanaBuscarCarpeta(QDialog):
         return self.__ventanaPadre.recibir_imagen2(imagen)
     
     def logout(self):
-        self.__ventanaPadre.show()
+        self.__ventanaPadre.logout()
         self.hide()
 
 class VentanaVisualizacion(QDialog):
@@ -308,7 +480,7 @@ class VentanaVisualizacion(QDialog):
         self.__ventanaPadre.show()
 
     def logout(self):
-        self.__ventanaPadre.cerrar()
+        self.__ventanaPadre.logout()
         self.hide()
 
 class VentanaInventario(QDialog):
@@ -316,13 +488,13 @@ class VentanaInventario(QDialog):
         super().__init__(ppal)
         loadUi('inventario.ui',self)
         self.__ventanaPadre = ppal
-        # self.folder=""
         self.setup()
 
     def setup(self):
         self.boton_abrir.clicked.connect(self.abrir_archivo)
         self.pushButton.clicked.connect(self.crear_tabla)
         self.boton_salir.clicked.connect(self.salir_archivo)
+        self.log_out.clicked.connect(self.logout)
 
     def abrir_archivo(self):
         #nos da una tupla que es la direccion y un nombre 
@@ -365,4 +537,8 @@ class VentanaInventario(QDialog):
         
     def salir_archivo(self):
         self.__ventanaPadre.show()
+        self.hide()
+
+    def logout(self):
+        self.__ventanaPadre.logout()
         self.hide()

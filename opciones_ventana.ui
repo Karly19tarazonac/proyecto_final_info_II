@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>280</width>
-    <height>285</height>
+    <height>360</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,7 +19,7 @@
      <x>50</x>
      <y>50</y>
      <width>181</width>
-     <height>181</height>
+     <height>231</height>
     </rect>
    </property>
    <property name="frameShape">
@@ -29,27 +29,6 @@
     <enum>QFrame::Raised</enum>
    </property>
    <layout class="QGridLayout" name="gridLayout">
-    <item row="3" column="0">
-     <widget class="QPushButton" name="mirar_inventarios">
-      <property name="styleSheet">
-       <string notr="true">background-color: rgb(255, 255, 255);</string>
-      </property>
-      <property name="text">
-       <string>Mirar inventarios</string>
-      </property>
-     </widget>
-    </item>
-    <item row="5" column="0">
-     <widget class="QPushButton" name="Diagnosticos">
-      <property name="styleSheet">
-       <string notr="true">background-color: rgb(255, 255, 255);
-</string>
-      </property>
-      <property name="text">
-       <string>Diagnosticos</string>
-      </property>
-     </widget>
-    </item>
     <item row="2" column="0">
      <widget class="QPushButton" name="leer_archivo_dcm">
       <property name="baseSize">
@@ -72,7 +51,38 @@
       </property>
      </widget>
     </item>
+    <item row="3" column="0">
+     <widget class="QPushButton" name="img3d">
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(255, 255, 255);</string>
+      </property>
+      <property name="text">
+       <string>Visualizar Imagen 3D</string>
+      </property>
+     </widget>
+    </item>
     <item row="4" column="0">
+     <widget class="QPushButton" name="mirar_inventarios">
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(255, 255, 255);</string>
+      </property>
+      <property name="text">
+       <string>Mirar inventarios</string>
+      </property>
+     </widget>
+    </item>
+    <item row="6" column="0">
+     <widget class="QPushButton" name="Diagnosticos">
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(255, 255, 255);
+</string>
+      </property>
+      <property name="text">
+       <string>Diagnosticos</string>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="0">
      <widget class="QPushButton" name="pushButton">
       <property name="styleSheet">
        <string notr="true">background-color: rgb(255, 255, 255);</string>
@@ -90,7 +100,7 @@
      <x>10</x>
      <y>10</y>
      <width>261</width>
-     <height>261</height>
+     <height>341</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -123,23 +133,26 @@ background-color: rgb(140, 140, 140);</string>
     <string>Presione opcion deseada:</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="salir">
+  <widget class="QPushButton" name="log_out">
    <property name="geometry">
     <rect>
      <x>180</x>
-     <y>240</y>
+     <y>310</y>
      <width>75</width>
      <height>23</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(255, 255, 255);</string>
+   </property>
    <property name="text">
-    <string>Salir</string>
+    <string>Log Out</string>
    </property>
   </widget>
   <zorder>label</zorder>
   <zorder>frame</zorder>
   <zorder>label_2</zorder>
-  <zorder>salir</zorder>
+  <zorder>log_out</zorder>
  </widget>
  <resources/>
  <connections/>
