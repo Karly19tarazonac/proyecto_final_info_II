@@ -294,11 +294,7 @@ class Ventana_opciones2(QDialog):
         self.setup()
     
     def setup(self):
-        # self.leer_archivo_dcm.clicked.connect(self.abrirVentanaBuscarCarpeta)
         self.mirar_inventarios.clicked.connect(self.abrirVentanaInventario)
-        # self.Diagnosticos.clicked.connect(self.abrirVentanaDiagnosticos)
-        # self.pushButton.clicked.connect(self.abiriVentanaAnestesia)
-        self.salir.clicked.connect(self.cerrar)
         self.log_out.clicked.connect(self.logout)
 
     def abrirVentanaInventario(self):
@@ -311,7 +307,7 @@ class Ventana_opciones2(QDialog):
         self.hide()
 
     def logout(self):
-        self.__ventanaPadre.logout()
+        self.__ventanaPadre.show()
         self.hide()
 
 class VentanaDiagnosticos(QDialog):
@@ -353,9 +349,9 @@ class VentanaAnestesia(QDialog):
         self.grafica=Canvas_grafica()
         self.verticalLayout.addWidget(self.grafica)
         self.oxigeno.valueChanged.connect(self.slider_uno)
-        # self.anest.valueChanged.connect(self.slider_dos)
+        self.anset.valueChanged.connect(self.slider_dos)
         self.presion.valueChanged.connect(self.slider_tres)
-        self.boton_salir.clicked.connect(lambda:self.close())
+        self.boton_salir.clicked.connect(lambda:self.cerrar)
         self.log_out.clicked.connect(self.logout)
 
 
@@ -373,6 +369,10 @@ class VentanaAnestesia(QDialog):
 
     def logout(self):
         self.__ventanaPadre.logout()
+        self.hide()
+
+    def cerrar(self):
+        self.__ventanaPadre.show()
         self.hide()
 
 class Canvas_grafica(FigureCanvas):
