@@ -1,3 +1,9 @@
+import sys
+import numpy as np
+from PyQt5 import QtCore
+from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
+from PyQt5 import QtWidgets
+import matplotlib.pyplot as plt
 from PyQt5.QtWidgets import QApplication,QMainWindow, QDialog, QMessageBox, QFileDialog;
 from log_in import Ui_inicio_de_sesion
 from PyQt5.uic import loadUi;
@@ -44,7 +50,16 @@ class Ventanaprincipal(QMainWindow):
 
     def recibir_imagen2(self,imagen):
         return self.__controlador.dcm_info(imagen)
+        
+    def slider_uno(self, event):
+        self.__controlador.datos_slide1(event)
+        
+    # def slider_dos(self, event):
+    #     self.__controlador.datos_slide2(event)
     
+    def slider_tres(self, event):
+        self.__controlador.datos_slide3(event)
+        
     def abrirVentanaopciones(self):
         ventana_opciones=AbrirVentana_opciones(self)
         self.hide()
@@ -61,6 +76,12 @@ class AbrirVentana_opciones(QDialog):
         self.leer_archivo_dcm.clicked.connect(self.abrirVentanaBuscarCarpeta)
         self.mirar_inventarios.clicked.connect(self.abrirVentanaInventario)
         self.Diagnosticos.clicked.connect(self.abrirVentanaDiagnosticos)
+        self.pushButton.clicked.connect(self.abiriVentanaAnestesia)
+        
+     def abiriVentanaAnestesia(self):
+        ventana_anestesia=VentanaAnestesia(self)
+        self.hide()
+        ventana_anestesia.show() 
 
     def abrirVentanaInventario(self):
         ventana_inventario=VentanaInventario(self)
@@ -77,7 +98,16 @@ class AbrirVentana_opciones(QDialog):
 
     def recibir_imagen2(self,imagen):
         return self.__ventanaPadre.recibir_imagen2(imagen)
+
+    def slider_uno(self, event):
+        self.__ventanaPadre.slider_uno(event)
         
+    # def recib_slider_dos(self, event):
+    #     self.__ventanaPadre.recib_slider_dos(event)
+     
+    def slider_tres(self, event):
+        self.__ventanaPadre.slider_tres(event)
+       
     def abrirVentanaDiagnosticos(self):
         ventana_diagnostico=VentanaDiagnosticos(self)
         self.hide()
@@ -108,6 +138,67 @@ class VentanaDiagnosticos(QDialog):
         text = open(filename,"r")
         self.display.setText(text.read())
 
+class VentanaAnestesia(QDialog):
+    def __init__(self, ppal=None):
+        super().__init__(ppal)
+        loadUi(r'C:\Users\KarlyJuliana\Documents\universidad\informatica_II\proyecto_final_info_II\anestesia.ui',self)
+        self.__ventanaPadre = ppal
+        self.setup()
+    
+    def setup(self):
+        #se programa la senal para el boton
+        self.grafica=Canvas_grafica()
+        self.verticalLayout.addWidget(self.grafica)
+        self.oxigeno.valueChanged.connect(self.slider_uno)
+        # self.anest.valueChanged.connect(self.slider_dos)
+        self.presion.valueChanged.connect(self.slider_tres)
+        self.boton_salir.clicked.connect(lambda:self.close())
+
+
+    def slider_uno(self, event):
+        valor1 = self.__ventanaPadre.slider_uno(event)
+        self.grafica.datos1(valor1)
+
+    # def slider_dos(self, event):
+    #     valor2 = self.__ventanaPadre.slider_dos(event)
+    #     self.grafica.datos2(valor2) 
+    
+    def slider_tres(self, event):
+        valor3 = self.__ventanaPadre.slider_tres(event)
+        self.grafica.datos3(valor3)
+
+    def logout(self):
+        self.__ventanaPadre.show()
+        self.hide()
+
+class Canvas_grafica(FigureCanvas):
+    def __init__(self, parent=None):     
+        self.fig , self.ax = plt.subplots(facecolor='gray')
+        super().__init__(self.fig) 
+        self.ax.grid()
+        self.ax.margins(x=0)
+        self.nivel1 = 10
+        # self.nivel2 = 1
+        self.nivel3 = 1
+        self.grafica_datos()
+
+    def datos1(self, valor1):
+        self.nivel1 = valor1
+
+    # def datos2(self, valor2):
+    #     self.nivel2 = valor2
+
+    def datos3(self, valor3):
+        self.nivel3 = valor3
+        
+    def grafica_datos(self):
+        plt.title("Administracion de anestesia")
+        x = np.arange(-np.pi, 10*np.pi, 0.01) 
+        line, = self.ax.plot(x, self.nivel1*np.sin(self.nivel3*x), color='r',linewidth=2)
+        self.draw()     
+        line.set_ydata(np.sin(x)+24)
+        QtCore.QTimer.singleShot(10, self.grafica_datos)
+    
 class VentanaBuscarCarpeta(QDialog):
     def __init__(self, ppal=None):
         super().__init__(ppal)
