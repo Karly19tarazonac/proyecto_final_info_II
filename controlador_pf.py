@@ -15,6 +15,12 @@ class Coordinador(object):
         self.__mi_sistema.pictureMaker(imagen)
     def dcm_info(self,imagen):
         return self.__mi_sistema.leerDicom(imagen)
+
+    def datos_slide1(self, valor1):
+        return self.__mi_sistema.ampliarSenal(valor1)
+    
+    def datos_slide3(self, valor3):
+        return self.__mi_sistema.frecuenciaSenal(valor3)
     
 #esta clase no cambia ya que en esta simplemente se hacen las conexiones que siempre van
 class Principal(object):
