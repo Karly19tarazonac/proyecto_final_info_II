@@ -3,6 +3,9 @@ import matplotlib.pyplot as plt
 
 class Servicio(object):
     def __init__(self):
+        self.nivel1=10
+        self.nivel2=1
+        self.nivel3=1
         self.__usuarios = {}
         #se crea un usuario inicial para arrancar el sistema
         self.__usuarios['bio12345'] = 'medicoAnalitico'
@@ -39,3 +42,15 @@ class Servicio(object):
             plt.imshow(im, cmap = plt.cm.bone)
         plt.axis('off')
         plt.savefig("temp_image.png")
+
+    def ampliarSenal(self,valor1):
+        self.nivel1 = valor1*0.1
+        return self.nivel1
+
+    def frecuenciaSenal(self, valor3):
+        self.nivel3 = valor3*0.05
+        return self.nivel3
+    
+    # def increment_anest(self, valor2):
+    #     self.nivel2 = valor2
+    #     return self.nivel2
