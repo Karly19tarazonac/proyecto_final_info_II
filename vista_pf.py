@@ -4,7 +4,7 @@ from PyQt5 import QtCore
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from PyQt5 import QtWidgets
 import matplotlib.pyplot as plt
-from PyQt5.QtWidgets import QApplication,QMainWindow, QDialog, QMessageBox, QFileDialog;
+from PyQt5.QtWidgets import QApplication,QMainWindow, QDialog, QMessageBox, QFileDialog, QTableWidgetItem;
 from log_in import Ui_inicio_de_sesion
 from PyQt5.uic import loadUi;
 import os
@@ -52,13 +52,13 @@ class Ventanaprincipal(QMainWindow):
         return self.__controlador.dcm_info(imagen)
         
     def slider_uno(self, event):
-        self.__controlador.datos_slide1(event)
+        return self.__controlador.datos_slide1(event)
         
     # def slider_dos(self, event):
     #     self.__controlador.datos_slide2(event)
     
     def slider_tres(self, event):
-        self.__controlador.datos_slide3(event)
+        return self.__controlador.datos_slide3(event)
         
     def abrirVentanaopciones(self):
         ventana_opciones=AbrirVentana_opciones(self)
@@ -78,7 +78,7 @@ class AbrirVentana_opciones(QDialog):
         self.Diagnosticos.clicked.connect(self.abrirVentanaDiagnosticos)
         self.pushButton.clicked.connect(self.abiriVentanaAnestesia)
         
-     def abiriVentanaAnestesia(self):
+    def abiriVentanaAnestesia(self):
         ventana_anestesia=VentanaAnestesia(self)
         self.hide()
         ventana_anestesia.show() 
@@ -100,13 +100,13 @@ class AbrirVentana_opciones(QDialog):
         return self.__ventanaPadre.recibir_imagen2(imagen)
 
     def slider_uno(self, event):
-        self.__ventanaPadre.slider_uno(event)
+        return self.__ventanaPadre.slider_uno(event)
         
     # def recib_slider_dos(self, event):
     #     self.__ventanaPadre.recib_slider_dos(event)
      
     def slider_tres(self, event):
-        self.__ventanaPadre.slider_tres(event)
+        return self.__ventanaPadre.slider_tres(event)
        
     def abrirVentanaDiagnosticos(self):
         ventana_diagnostico=VentanaDiagnosticos(self)
@@ -141,7 +141,7 @@ class VentanaDiagnosticos(QDialog):
 class VentanaAnestesia(QDialog):
     def __init__(self, ppal=None):
         super().__init__(ppal)
-        loadUi(r'C:\Users\KarlyJuliana\Documents\universidad\informatica_II\proyecto_final_info_II\anestesia.ui',self)
+        loadUi('anestesia.ui',self)
         self.__ventanaPadre = ppal
         self.setup()
     
