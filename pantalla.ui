@@ -26,17 +26,7 @@
     <string>abrir archivo</string>
    </property>
   </widget>
-  <widget class="QTextBrowser" name="textBrowser_2">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>50</y>
-     <width>401</width>
-     <height>241</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="lineEdit">
+  <widget class="QLineEdit" name="file_path">
    <property name="geometry">
     <rect>
      <x>90</x>
@@ -57,6 +47,16 @@
    </property>
    <property name="text">
     <string>salir</string>
+   </property>
+  </widget>
+  <widget class="QTextEdit" name="display">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>50</y>
+     <width>401</width>
+     <height>241</height>
+    </rect>
    </property>
   </widget>
  </widget>

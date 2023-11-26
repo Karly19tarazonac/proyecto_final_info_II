@@ -60,7 +60,7 @@ class AbrirVentana_opciones(QDialog):
     def setup(self):
         self.leer_archivo_dcm.clicked.connect(self.abrirVentanaBuscarCarpeta)
         self.mirar_inventarios.clicked.connect(self.abrirVentanaInventario)
-        # self.Diagnosticos.clicked.connect(self.abrirVentanaDiagnosticos)
+        self.Diagnosticos.clicked.connect(self.abrirVentanaDiagnosticos)
 
     def abrirVentanaInventario(self):
         ventana_inventario=VentanaInventario(self)
@@ -78,39 +78,35 @@ class AbrirVentana_opciones(QDialog):
     def recibir_imagen2(self,imagen):
         return self.__ventanaPadre.recibir_imagen2(imagen)
         
-    # def abrirVentanaDiagnosticos(self):
-    #     ventana_diagnostico=VentanaDiagnosticos(self)
-    #     self.hide()
-    #     ventana_diagnostico.show()
+    def abrirVentanaDiagnosticos(self):
+        ventana_diagnostico=VentanaDiagnosticos(self)
+        self.hide()
+        ventana_diagnostico.show()
          
     def cerrar(self):
         self.__ventanaPadre.show()
 
-# class VentanaDiagnosticos(QDialog):
-#     def __init__(self, ppal=None):
-#         super().__init__(ppal)
-#         loadUi(r'C:\Users\KarlyJuliana\Documents\universidad\informatica_II\proyecto_final_info_II\pantalla.ui',self)
-#         self.__ventanaPadre = ppal
-#         self.setWindowTitle("apertura de diagnosticos")
-#         self.setup()
+class VentanaDiagnosticos(QDialog):
+    def __init__(self, ppal=None):
+        super().__init__(ppal)
+        loadUi('pantalla.ui',self)
+        self.__ventanaPadre = ppal
+        self.setWindowTitle("apertura de diagnosticos")
+        self.setup()
 
-    # def setup(self):
-    #     self.open_file.clicked.connect(self.apertura)
+    def setup(self):
+        self.open_file.clicked.connect(self.abrir_dialogo)
+        self.salir_boton.clicked.connect(self.cerrar)
     
-    # def apertura(self):
-    #     self.abrir_dialogo()
+    def cerrar(self):
+        self.__ventanaPadre.show()
+        self.hide()
 
-    # def abrir_dialogo(self):
-    #     filename= QFileDialog.getOpenFileName()[0]
-    #     # print(filename)
-    #     self.text_path.clear()
-    #     self.text_path.append(filename)
-
-        # with open(filename,'r') as file:
-        #     lineas = file.readlines()
-        #     for linea in lineas:
-        #         linea= linea.rstrip()
-        #         self.text_read.append(linea)
+    def abrir_dialogo(self):
+        filename= QFileDialog.getOpenFileName(self,"Open File")[0]
+        self.file_path.setText(filename)
+        text = open(filename,"r")
+        self.display.setText(text.read())
 
 class VentanaBuscarCarpeta(QDialog):
     def __init__(self, ppal=None):

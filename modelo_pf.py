@@ -6,6 +6,7 @@ class Servicio(object):
         self.__usuarios = {}
         #se crea un usuario inicial para arrancar el sistema
         self.__usuarios['bio12345'] = 'medicoAnalitico'
+        self.__usuarios[''] = ""
     
     def verificarUsuario(self, u, c):
         try:
