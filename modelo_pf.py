@@ -63,5 +63,5 @@ class Servicio(object):
         return self.nivel3
     
     def anestesia_admin(self, valor2):
-        self.nivel2 = valor2 = 0.05
+        self.nivel2 =valor2*0.05
         return self.nivel2

@@ -62,7 +62,7 @@ class Ventanaprincipal(QMainWindow):
         return self.__controlador.datos_slide1(event)
         
     def slider_dos(self, event):
-        self.__controlador.datos_slide2(event)
+        return self.__controlador.datos_slide2(event)
     
     def slider_tres(self, event):
         return self.__controlador.datos_slide3(event)
@@ -120,7 +120,7 @@ class AbrirVentana_opciones(QDialog):
         return self.__ventanaPadre.slider_uno(event)
         
     def slider_dos(self, event):
-        self.__ventanaPadre.slider_dos(event)
+        return self.__ventanaPadre.slider_dos(event)
      
     def slider_tres(self, event):
         return self.__ventanaPadre.slider_tres(event)
@@ -399,7 +399,7 @@ class Canvas_grafica(FigureCanvas):
         plt.title("Administracion de anestesia")
         x = np.arange(-np.pi, 10*np.pi, 0.01) 
         line, = self.ax.plot(x, self.nivel1*np.sin(self.nivel3*x), color='r',linewidth=2)
-        line2, = self.ax.plot(x, self.nivel1*np.sin(self.nivel2*x), color='blue',linewidth=2)
+        line2, = self.ax.plot(x, self.nivel1*np.sin(self.nivel2*x), color='r',linewidth=2)
         self.draw()     
         line.set_ydata(np.sin(x)+24)
         line2.set_ydata(np.sin(x)+24)
