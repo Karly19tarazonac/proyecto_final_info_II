@@ -351,7 +351,7 @@ class VentanaAnestesia(QDialog):
         self.oxigeno.valueChanged.connect(self.slider_uno)
         self.anset.valueChanged.connect(self.slider_dos)
         self.presion.valueChanged.connect(self.slider_tres)
-        self.boton_salir.clicked.connect(lambda:self.cerrar)
+        self.boton_salir.clicked.connect(self.cerrar)
         self.log_out.clicked.connect(self.logout)
 
 

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>459</width>
-    <height>393</height>
+    <width>515</width>
+    <height>415</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,8 +19,8 @@
   <widget class="QSlider" name="oxigeno">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>210</y>
+     <x>20</x>
+     <y>270</y>
      <width>141</width>
      <height>31</height>
     </rect>
@@ -177,7 +177,7 @@
   <widget class="QSlider" name="anset">
    <property name="geometry">
     <rect>
-     <x>130</x>
+     <x>180</x>
      <y>270</y>
      <width>141</width>
      <height>31</height>
@@ -335,8 +335,8 @@
   <widget class="QSlider" name="presion">
    <property name="geometry">
     <rect>
-     <x>260</x>
-     <y>220</y>
+     <x>340</x>
+     <y>270</y>
      <width>141</width>
      <height>31</height>
     </rect>
@@ -496,40 +496,40 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>60</x>
-     <y>240</y>
-     <width>111</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>suministro de oxigeno</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_3">
-   <property name="geometry">
-    <rect>
-     <x>310</x>
-     <y>250</y>
-     <width>47</width>
-     <height>13</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>presion</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_4">
-   <property name="geometry">
-    <rect>
-     <x>160</x>
+     <x>40</x>
      <y>310</y>
      <width>111</width>
      <height>16</height>
     </rect>
    </property>
    <property name="text">
-    <string>liquidos anestesicos</string>
+    <string>Suministro de Oxigeno</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_3">
+   <property name="geometry">
+    <rect>
+     <x>390</x>
+     <y>310</y>
+     <width>47</width>
+     <height>13</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Presion</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_4">
+   <property name="geometry">
+    <rect>
+     <x>210</x>
+     <y>310</y>
+     <width>111</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Liquidos Anestesicos</string>
    </property>
   </widget>
   <widget class="QWidget" name="verticalLayoutWidget">
@@ -537,8 +537,8 @@
     <rect>
      <x>30</x>
      <y>20</y>
-     <width>391</width>
-     <height>161</height>
+     <width>451</width>
+     <height>231</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout"/>
@@ -546,8 +546,8 @@
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-     <x>270</x>
-     <y>350</y>
+     <x>300</x>
+     <y>370</y>
      <width>158</width>
      <height>25</height>
     </rect>
