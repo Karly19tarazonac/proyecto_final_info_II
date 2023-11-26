@@ -56,6 +56,6 @@ class Servicio(object):
         self.nivel3 = valor3*0.05
         return self.nivel3
     
-    # def increment_anest(self, valor2):
-    #     self.nivel2 = valor2
-    #     return self.nivel2
+    def anestesia_admin(self, valor2):
+        self.nivel2 =valor2*0.05
+        return self.nivel2
