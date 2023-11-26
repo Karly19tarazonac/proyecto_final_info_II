@@ -61,8 +61,8 @@ class Ventanaprincipal(QMainWindow):
     def slider_uno(self, event):
         return self.__controlador.datos_slide1(event)
         
-    # def slider_dos(self, event):
-    #     self.__controlador.datos_slide2(event)
+    def slider_dos(self, event):
+        self.__controlador.datos_slide2(event)
     
     def slider_tres(self, event):
         return self.__controlador.datos_slide3(event)
@@ -119,8 +119,8 @@ class AbrirVentana_opciones(QDialog):
     def slider_uno(self, event):
         return self.__ventanaPadre.slider_uno(event)
         
-    # def recib_slider_dos(self, event):
-    #     self.__ventanaPadre.recib_slider_dos(event)
+    def slider_dos(self, event):
+        self.__ventanaPadre.slider_dos(event)
      
     def slider_tres(self, event):
         return self.__ventanaPadre.slider_tres(event)
@@ -363,9 +363,9 @@ class VentanaAnestesia(QDialog):
         valor1 = self.__ventanaPadre.slider_uno(event)
         self.grafica.datos1(valor1)
 
-    # def slider_dos(self, event):
-    #     valor2 = self.__ventanaPadre.slider_dos(event)
-    #     self.grafica.datos2(valor2) 
+    def slider_dos(self, event):
+        valor2 = self.__ventanaPadre.slider_dos(event)
+        self.grafica.datos2(valor2) 
     
     def slider_tres(self, event):
         valor3 = self.__ventanaPadre.slider_tres(event)
@@ -382,15 +382,15 @@ class Canvas_grafica(FigureCanvas):
         self.ax.grid()
         self.ax.margins(x=0)
         self.nivel1 = 10
-        # self.nivel2 = 1
+        self.nivel2 = 1
         self.nivel3 = 1
         self.grafica_datos()
 
     def datos1(self, valor1):
         self.nivel1 = valor1
 
-    # def datos2(self, valor2):
-    #     self.nivel2 = valor2
+    def datos2(self, valor2):
+        self.nivel2 = valor2
 
     def datos3(self, valor3):
         self.nivel3 = valor3
@@ -399,8 +399,10 @@ class Canvas_grafica(FigureCanvas):
         plt.title("Administracion de anestesia")
         x = np.arange(-np.pi, 10*np.pi, 0.01) 
         line, = self.ax.plot(x, self.nivel1*np.sin(self.nivel3*x), color='r',linewidth=2)
+        line2, = self.ax.plot(x, self.nivel1*np.sin(self.nivel2*x), color='blue',linewidth=2)
         self.draw()     
         line.set_ydata(np.sin(x)+24)
+        line2.set_ydata(np.sin(x)+24)
         QtCore.QTimer.singleShot(10, self.grafica_datos)
     
 class VentanaBuscarCarpeta(QDialog):

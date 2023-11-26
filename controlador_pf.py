@@ -22,6 +22,9 @@ class Coordinador(object):
     def datos_slide1(self, valor1):
         return self.__mi_sistema.ampliarSenal(valor1)
     
+    def datos_slide2(self, valor2):
+        return self.__mi_sistema.anestesia_admin(valor2)
+    
     def datos_slide3(self, valor3):
         return self.__mi_sistema.frecuenciaSenal(valor3)
     
