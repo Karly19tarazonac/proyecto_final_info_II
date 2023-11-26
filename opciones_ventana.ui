@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>282</width>
-    <height>256</height>
+    <width>280</width>
+    <height>285</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -90,7 +90,7 @@
      <x>10</x>
      <y>10</y>
      <width>261</width>
-     <height>231</height>
+     <height>261</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -123,9 +123,23 @@ background-color: rgb(140, 140, 140);</string>
     <string>Presione opcion deseada:</string>
    </property>
   </widget>
+  <widget class="QPushButton" name="salir">
+   <property name="geometry">
+    <rect>
+     <x>180</x>
+     <y>240</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Salir</string>
+   </property>
+  </widget>
   <zorder>label</zorder>
   <zorder>frame</zorder>
   <zorder>label_2</zorder>
+  <zorder>salir</zorder>
  </widget>
  <resources/>
  <connections/>

@@ -38,9 +38,11 @@ class Ventanaprincipal(QMainWindow):
         msg.setIcon(QMessageBox.Information)
         msg.setWindowTitle("Resultado")
         #se selecciona el resultado de acuerdo al resultado de la operacion
-        if resultado == True:
+        if resultado == "medico":
             self.abrirVentanaopciones()
-        else:
+        if resultado == "personal":
+            self.abrirVentanaopciones2()
+        if resultado == False:
             msg.setText("Usuario no Valido")
         #se muestra la ventana
             msg.show()
@@ -64,6 +66,11 @@ class Ventanaprincipal(QMainWindow):
         ventana_opciones=AbrirVentana_opciones(self)
         self.hide()
         ventana_opciones.show()
+
+    def abrirVentanaopciones2(self):
+        ventana_opciones=Ventana_opciones2(self)
+        self.hide()
+        ventana_opciones.show()
     
 class AbrirVentana_opciones(QDialog):
     def __init__(self, ppal=None):
@@ -77,7 +84,8 @@ class AbrirVentana_opciones(QDialog):
         self.mirar_inventarios.clicked.connect(self.abrirVentanaInventario)
         self.Diagnosticos.clicked.connect(self.abrirVentanaDiagnosticos)
         self.pushButton.clicked.connect(self.abiriVentanaAnestesia)
-        
+        self.salir.clicked.connect(self.cerrar)
+
     def abiriVentanaAnestesia(self):
         ventana_anestesia=VentanaAnestesia(self)
         self.hide()
@@ -115,6 +123,30 @@ class AbrirVentana_opciones(QDialog):
          
     def cerrar(self):
         self.__ventanaPadre.show()
+        self.hide()
+
+class Ventana_opciones2(QDialog):
+    def __init__(self, ppal=None):
+        super().__init__(ppal)
+        loadUi('opciones_ventana2.ui',self)
+        self.__ventanaPadre = ppal
+        self.setup()
+    
+    def setup(self):
+        # self.leer_archivo_dcm.clicked.connect(self.abrirVentanaBuscarCarpeta)
+        self.mirar_inventarios.clicked.connect(self.abrirVentanaInventario)
+        # self.Diagnosticos.clicked.connect(self.abrirVentanaDiagnosticos)
+        # self.pushButton.clicked.connect(self.abiriVentanaAnestesia)
+        self.salir.clicked.connect(self.cerrar)
+
+    def abrirVentanaInventario(self):
+        ventana_inventario=VentanaInventario(self)
+        self.hide()
+        ventana_inventario.show() 
+
+    def cerrar(self):
+        self.__ventanaPadre.show()
+        self.hide()
 
 class VentanaDiagnosticos(QDialog):
     def __init__(self, ppal=None):
